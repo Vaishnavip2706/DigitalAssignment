@@ -1,12 +1,28 @@
 import mongoose from "mongoose";
 
-const noteSchema = new mongoose.Schema({
-  teacherId: String,
-  title: String,
-  subject: String,
-  year: String,
-  file: String,
-  createdAt: { type: Date, default: Date.now }
-});
+const noteSchema = new mongoose.Schema(
+{
+  title: {
+    type: String,
+    required: true,
+  },
+
+  subject: {
+    type: String,
+    required: true,
+  },
+
+  file: {
+    type: String,
+    required: true,
+  },
+
+  teacher: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  }
+},
+{ timestamps: true }
+);
 
 export default mongoose.model("Note", noteSchema);

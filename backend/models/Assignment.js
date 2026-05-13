@@ -1,11 +1,16 @@
 import mongoose from "mongoose";
 
-const assignmentSchema = new mongoose.Schema({
+const assignmentSchema = new mongoose.Schema(
+{
   title: String,
-  subject: String,
-  year: String,
   description: String,
-  createdAt: { type: Date, default: Date.now }
-});
+  deadline: Date,
+  teacher: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+},
+{ timestamps: true }
+);
 
 export default mongoose.model("Assignment", assignmentSchema);

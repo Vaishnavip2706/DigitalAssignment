@@ -1,13 +1,30 @@
 import mongoose from "mongoose";
 
-const submissionSchema = new mongoose.Schema({
-  studentId: String,
-  year: String,
-  subject: String,
-  marks: Number,
-  remark: String,
+const submissionSchema = new mongoose.Schema(
+{
+  assignment: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Assignment",
+  },
+
+  student: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+
   file: String,
-  createdAt: { type: Date, default: Date.now }
-});
+
+  marks: {
+    type: Number,
+    default: null,
+  },
+
+  remark: {
+    type: String,
+    default: "",
+  },
+},
+{ timestamps: true }
+);
 
 export default mongoose.model("Submission", submissionSchema);
